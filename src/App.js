@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useRoutes, BrowserRouter } from "react-router-dom";
+import MyActions from "./pages/MyActions";
+import Login from "./pages/Login";
+import Status from "./pages/Status";
+import { DataProvider } from "./context/context";
 
-function App() {
+const AppRoutes = () => {
+  let routes = useRoutes([
+    { path: "/", element: <MyActions /> },
+    { path: "/login", element: <Login /> },
+    { path: "/status", element: <Status /> },
+  ]);
+
+  return routes;
+};
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </DataProvider>
   );
-}
+};
 
 export default App;
